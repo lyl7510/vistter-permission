@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--element 取数标签 name:前端调用 single:单条数据 data:列表数据 count：数据总数 ref:数据别名-->
+<projects>
+
+    <!--项目开始-->
+    <element name="PERMISSION_PROJECT_PAGER" data="true" count="true">
+    </element>
+    <element name="PERMISSION_PROJECT_LOAD" single="true">
+    </element>
+    <!--项目结束-->
+
+    <!--角色管理开始-->
+    <element name="PERMISSION_ROLE_PAGER" data="true" count="true">
+    </element>
+    <element name="PERMISSION_ROLE_LOAD" single="true">
+    </element>
+    <element name="PERMISSION_ROLE_List" data="true"></element>
+    <!--角色管理结束-->
+
+    <!--模块管理开始-->
+    <element name="PERMISSION_MODULE_PAGER" data="true" count="true">
+    </element>
+    <element name="PERMISSION_MODULE_LOAD" single="true">
+    </element>
+    <element name="PERMISSION_MODULE_LIST" data="true">
+    </element>
+    <element name="PERMISSION_MODULE_ROLEID" data="true">
+    </element>
+    <!--模块管理结束-->
+
+    <!--用户开始-->
+    <element name="PERMISSION_USERS_PAGER" data="true" count="true">
+    </element>
+    <element name="PERMISSION_USERS_LOAD" single="true">
+    </element>
+    <!--用户结束-->
+
+    <!--用户角色权限表开始-->
+    <select name="PERMISSION_USER_MODULELIST" data="true">
+    </select>
+    <!--用户角色权限表结束-->
+</projects>

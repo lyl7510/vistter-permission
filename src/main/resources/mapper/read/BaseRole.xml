@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.base.vistter.dao.ReadDataDao">
+
+    <select id="PERMISSION_ROLE_PAGERData" parameterType="map" resultType="map">
+        select * from base_role where PROJECT_CODE = #{PROJECT_CODE}
+        <if test="NAME!= null and NAME != ''">
+            and NAME LIKE CONCAT('%',#{NAME},'%')
+        </if>
+        <if test="STATE!= null and STATE != ''">
+            and STATE = #{STATE}
+        </if>
+        order by CREATE_DATE desc  limit #{start} , #{limit}
+    </select>
+    <select id="PERMISSION_ROLE_PAGERCount" parameterType="map" resultType="long">
+        select count(*) from base_role where PROJECT_CODE = #{PROJECT_CODE}
+        <if test="NAME!= null and NAME != ''">
+            and NAME LIKE CONCAT('%',#{NAME},'%')
+        </if>
+        <if test="STATE!= null and STATE != ''">
+            and STATE = #{STATE}
+        </if>
+    </select>
+
+    <select id="PERMISSION_ROLE_LOAD" parameterType="map" resultType="map">
+        select * from base_role where ID = #{ID}
+    </select>
+
+    <select id="PERMISSION_ROLE_ListData"  parameterType="map" resultType="map">
+        select * from base_role where PROJECT_CODE = #{PROJECT_CODE}
+    </select>
+
+</mapper>

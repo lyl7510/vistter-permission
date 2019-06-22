@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.base.vistter.dao.ReadDataDao">
+    
+    <select id="PERMISSION_USER_MODULELISTData" parameterType="map" resultType="map">
+        select brm.* from base_role_module brm
+        INNER JOIN  base_module bm on brm.BASE_MODULE_ID = bm.ID
+        where brm.PROJECT_CODE = #{PROJECT_CODE} AND brm.BASE_ROLE_ID = #{BASE_ROLE_ID} AND bm.MODULE_TYPE = #{MODULE_TYPE}
+    </select>
+    
+</mapper>

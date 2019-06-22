@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.base.vistter.dao.WriteDataDao">
+
+    <insert id="PERMISSION_MODULE_SAVE" parameterType="map">
+        INSERT INTO base_module (ID, PROJECT_CODE, MODULE_TYPE, NAME, ICON, URL, PARENT_ID, STATE,ORDER_LIST, CREATEOR, CREATE_DATE, MODIFIER, MODIFY_DATE)
+        values (uuid(), #{PROJECT_CODE}, #{MODULE_TYPE}, #{NAME}, #{ICON}, #{URL}, #{PARENT_ID}, #{STATE},#{ORDER_LIST}, #{CREATEOR}, now(), #{MODIFIER}, NOW())
+    </insert>
+
+    <update id="PERMISSION_MODULE_UPDATE" parameterType="map">
+        UPDATE base_module
+        SET NAME=#{NAME},
+            ICON=#{ICON},
+            URL=#{URL},
+            PARENT_ID=#{PARENT_ID},
+            STATE       = #{STATE},
+            ORDER_LIST  = #{ORDER_LIST},
+            MODIFIER    = #{MODIFIER},
+            MODIFY_DATE=NOW()
+        WHERE ID = #{ID}
+    </update>
+
+    <delete id="PERMISSION_MODULE_DELETEBYID" parameterType="map">
+        DELETE
+        FROM base_module
+        WHERE ID = #{ID}
+    </delete>
+
+    <delete id="PERMISSION_MODULE_DELETE" parameterType="map">
+        DELETE
+        FROM base_module
+        WHERE ID in
+        <foreach collection="IDS" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
+
+    <update id="PERMISSION_MODULE_START" parameterType="map">
+        UPDATE base_module
+        SET STATE      = 0,
+            MODIFY_DATE=now()
+        WHERE ID = #{ID}
+    </update>
+
+    <update id="PERMISSION_MODULE_STOP" parameterType="map">
+        UPDATE base_module
+        SET STATE      = 1,
+            MODIFY_DATE=now()
+        WHERE ID = #{ID}
+    </update>
+
+</mapper>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<projects>
+
+    <!--项目开始-->
+    <element name="PERMISSION_PROJECT_SAVE" type="save">
+        <interceptor name="VERIFY_PROJECT_CODE" code="302"></interceptor>
+    </element>
+    <element name="PERMISSION_PROJECT_UPDATE" type="update">
+    </element>
+    <element name="PERMISSION_PROJECT_DELETEBYID" type="delete">
+        <interceptor name="PERMISSION_USER_COUNT_PROJECTID" code="301"></interceptor>
+    </element>
+    <element name="PERMISSION_PROJECT_DELETE" type="delete">
+        <interceptor name="PERMISSION_USER_COUNT_PROJECTIDS" code="301"></interceptor>
+    </element>
+    <element name="PERMISSION_PROJECT_START" type="update">
+    </element>
+    <element name="PERMISSION_PROJECT_STOP" type="update">
+    </element>
+    <!--项目结束-->
+
+    <!--角色开始-->
+    <element name="PERMISSION_ROLE_SAVE" type="save">
+    </element>
+    <element name="PERMISSION_ROLE_UPDATE" type="update">
+    </element>
+    <element name="PERMISSION_ROLE_DELETEBYID" type="delete">
+        <interceptor name="PERMISSION_USER_COUNT_ROLEID" code="303"></interceptor>
+        <element name="PERMISSION_ROLEMODULE_DELETEBYID" type="delete"></element>
+    </element>
+    <element name="PERMISSION_ROLE_DELETE" type="delete">
+        <interceptor name="PERMISSION_USER_COUNT_ROLEIDS" code="303"></interceptor>
+        <element name="PERMISSION_ROLEMODULE_DELETE_ROLEIDS" type="delete"></element>
+    </element>
+    <element name="PERMISSION_ROLE_START" type="update">
+    </element>
+    <element name="PERMISSION_ROLE_STOP" type="update">
+    </element>
+    <!--角色结束-->
+
+    <!--模块管理开始-->
+    <element name="PERMISSION_MODULE_SAVE" type="save">
+    </element>
+    <element name="PERMISSION_MODULE_UPDATE" type="update">
+    </element>
+    <element name="PERMISSION_MODULE_DELETEBYID" type="delete">
+        <element name="PERMISSION_ROLEMODULE_DELETEBYMODULEID" type="delete"></element>
+    </element>
+    <element name="PERMISSION_MODULE_DELETE" type="delete">
+        <element name="PERMISSION_ROLEMODULE_DELETEBYMODULEIDS" type="delete"></element>
+    </element>
+    <element name="PERMISSION_MODULE_START" type="update">
+    </element>
+    <element name="PERMISSION_MODULE_STOP" type="update">
+    </element>
+    <!--模块管理结束-->
+
+    <!--用户开始-->
+    <element name="PERMISSION_USERS_SAVE" type="save">
+        <interceptor name="PERMISSION_USERS_COUNT_USERNAME" code="304"></interceptor>
+    </element>
+    <element name="PERMISSION_USERS_UPDATE" type="update">
+    </element>
+    <element name="PERMISSION_USERS_DELETEBYID" type="delete">
+    </element>
+    <element name="PERMISSION_USERS_DELETE" type="delete">
+    </element>
+    <element name="PERMISSION_USERS_START" type="update">
+    </element>
+    <element name="PERMISSION_USERS_STOP" type="update">
+    </element>
+    <element name="PERMISSION_USERS_RESETPWD" type="update">
+    </element>
+    <!--用户结束-->
+
+    <!--用户角色权限表开始-->
+    <element name="PERMISSION_ROLEMODULE_SAVE" type="save">
+        <verification>
+            <list name="MODULE_IDS"></list>
+        </verification>
+        <element name="PERMISSION_ROLEMODULE_DELETE" type="delete"></element>
+    </element>
+    <!--用户角色权限表结束-->
+</projects>
