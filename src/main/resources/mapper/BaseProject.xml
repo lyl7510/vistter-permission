@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="BaseProject">
+
+    <select id="pager" parameterType="map" resultType="map">
+        select * from base_project
+        <where>
+            <if test="NAME!= null and NAME != ''">
+                (PROJECT_CODE LIKE CONCAT('%',#{NAME},'%') or PROJECT_NAME LIKE CONCAT('%',#{NAME},'%'))
+            </if>
+            <if test="STATUS!= null and STATUS != ''">
+                and STATUS = #{STATUS}
+            </if>
+        </where>
+        order by MODIFY_DATE desc  limit #{start} , #{limit}
+    </select>
+
+    <select id="pagerCount" parameterType="map" resultType="long">
+        select count(*) from base_project
+        <where>
+            <if test="NAME!= null and NAME != ''">
+                (PROJECT_CODE LIKE CONCAT('%',#{NAME},'%') or PROJECT_NAME LIKE CONCAT('%',#{NAME},'%'))
+            </if>
+            <if test="STATUS!= null and STATUS != ''">
+                and STATUS = #{STATUS}
+            </if>
+        </where>
+    </select>
+
+    <select id="findProjectSettingByCode" parameterType="string" resultType="map">
+        select * from base_project where PROJECT_CODE = #{_parameter}
+    </select>
+
+    <select id="verifyProjectCode" parameterType="string" resultType="long">
+        select count(*) from base_project where PROJECT_CODE = #{string}
+    </select>
+
+    <select id="load" parameterType="string" resultType="map">
+        select * from base_project where ID = #{_parameter}
+    </select>
+
+    <insert id="save" parameterType="map">
+        INSERT INTO base_project (ID, PROJECT_CODE, PROJECT_NAME, PROJECT_DES, TELPHONE_LOGIN, SECURITY_CODE, STATUS,
+                                  MODIFY_DATE)
+        values (uuid(), #{PROJECT_CODE}, #{PROJECT_NAME}, #{PROJECT_DES}, #{TELPHONE_LOGIN}, #{SECURITY_CODE},
+                #{STATUS}, now())
+    </insert>
+
+    <update id="update" parameterType="map">
+        UPDATE base_project
+        SET PROJECT_NAME  = #{PROJECT_NAME},
+            PROJECT_DES=#{PROJECT_DES},
+            TELPHONE_LOGIN=#{TELPHONE_LOGIN},
+            SECURITY_CODE=#{SECURITY_CODE},
+            STATUS=#{STATUS},
+            MODIFY_DATE=NOW()
+        WHERE ID = #{ID}
+    </update>
+
+    <delete id="deleteById" parameterType="map">
+        DELETE
+        FROM base_project
+        WHERE ID = #{ID}
+    </delete>
+
+    <delete id="delete" parameterType="map">
+        DELETE
+        FROM base_project
+        WHERE ID in
+        <foreach collection="IDS" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
+
+    <update id="start" parameterType="map">
+        UPDATE base_project
+        SET STATUS     = 0,
+            MODIFY_DATE=now()
+        WHERE ID = #{ID}
+    </update>
+
+    <update id="stop" parameterType="map">
+        UPDATE base_project
+        SET STATUS     = 1,
+            MODIFY_DATE=now()
+        WHERE ID = #{ID}
+    </update>
+
+</mapper>
