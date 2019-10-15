@@ -61,7 +61,7 @@ public class BaseModuleController {
         }
     }
 
-    @RequestMapping(value = "/moduleList", method = RequestMethod.POST , produces = "application/json;charset=UTF-8")
+  /*  @RequestMapping(value = "/moduleList", method = RequestMethod.POST , produces = "application/json;charset=UTF-8")
     public Result moduleList(HttpServletRequest request, @RequestBody Map paramMap){
         try {
             paramMap.put("PROJECT_CODE", SessionUtils.getProjectCode(request));
@@ -71,7 +71,7 @@ public class BaseModuleController {
             logger.error(e.getMessage());
             return Result.generErrorJson(e.getCode());
         }
-    }
+    }*/
 
     @RequestMapping(value = "/load", method = RequestMethod.POST , produces = "application/json;charset=UTF-8")
     public Result load(@RequestBody Map paramMap){
@@ -142,7 +142,7 @@ public class BaseModuleController {
     @RequestMapping(value = "/start", method = RequestMethod.POST , produces = "application/json;charset=UTF-8")
     public Result start(@RequestBody Map paramMap){
         try {
-            baseModuleService.start(MapUtils.getString(paramMap, "ID"));
+            baseModuleService.start(paramMap);
             return Result.generJson(null);
         } catch (PlatformException e) {
             logger.error(e.getMessage());
@@ -153,7 +153,7 @@ public class BaseModuleController {
     @RequestMapping(value = "/stop", method = RequestMethod.POST , produces = "application/json;charset=UTF-8")
     public Result stop(@RequestBody Map paramMap){
         try {
-            baseModuleService.stop(MapUtils.getString(paramMap, "ID"));
+            baseModuleService.stop(paramMap);
             return Result.generJson(null);
         } catch (PlatformException e) {
             logger.error(e.getMessage());

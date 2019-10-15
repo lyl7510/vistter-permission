@@ -33,18 +33,18 @@ public class BaseModuleMapperImpl extends BaseMapperImpl implements BaseModuleMa
         }
     }
 
-    public void start(String id) throws PlatformException{
+    public void start(Map paramMap) throws PlatformException{
         try {
-            super.update("start", id);
+            super.update("start", paramMap);
         } catch (Exception e) {
             logger.error(e.getMessage());
             throw new PlatformException();
         }
     }
 
-    public void stop(String id) throws PlatformException{
+    public void stop(Map paramMap) throws PlatformException{
         try {
-            super.update("stop", id);
+            super.update("stop", paramMap);
         } catch (Exception e) {
             logger.error(e.getMessage());
             throw new PlatformException();

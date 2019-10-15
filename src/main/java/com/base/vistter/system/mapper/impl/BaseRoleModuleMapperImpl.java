@@ -54,7 +54,7 @@ public class BaseRoleModuleMapperImpl extends BaseMapperImpl implements BaseRole
         }
     }
 
-    public void deleteByProjectRoleId(Map paramMap) throws PlatformException{
+    public void deleteByProjectRoleId(Map paramMap) throws PlatformException {
         try {
             super.delete("deleteByProjectRoleId", paramMap);
         } catch (Exception e) {
@@ -63,9 +63,18 @@ public class BaseRoleModuleMapperImpl extends BaseMapperImpl implements BaseRole
         }
     }
 
-    public void save(Map paramMap) throws PlatformException{
+    public void save(Map paramMap) throws PlatformException {
         try {
             super.save(paramMap);
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            throw new PlatformException();
+        }
+    }
+
+    public List getListByRoleId(Map paramMap) throws PlatformException {
+        try {
+            return super.findList("getListByRoleId", paramMap);
         } catch (Exception e) {
             logger.error(e.getMessage());
             throw new PlatformException();

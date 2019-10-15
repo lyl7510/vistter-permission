@@ -12,9 +12,9 @@ public interface BaseModuleService extends BaseService {
 
     List getProjectModuleList(Map paramMap) throws PlatformException;
 
-    void start(String id) throws PlatformException;
+    void start(Map paramMap) throws PlatformException;
 
-    void stop(String id) throws PlatformException;
+    void stop(Map paramMap) throws PlatformException;
 
-    List findProjectModuleList(Map paramMap) throws PlatformException;
+    /*List findProjectModuleList(Map paramMap) throws PlatformException;*/
 }

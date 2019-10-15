@@ -34,4 +34,16 @@ public class BaseRoleModuleController {
             return null;
         }
     }
+
+    @RequestMapping(value = "/getListByRoleId", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+    public Result getListByRoleId(HttpServletRequest request, @RequestBody Map paramMap) {
+        try {
+            paramMap.put("PROJECT_CODE", SessionUtils.getProjectCode(request));
+            baseRoleModuleService.getListByRoleId(paramMap);
+            return Result.generJson(null);
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            return null;
+        }
+    }
 }

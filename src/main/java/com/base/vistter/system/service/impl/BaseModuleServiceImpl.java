@@ -54,18 +54,18 @@ public class BaseModuleServiceImpl extends BaseServiceImpl implements BaseModule
     }
 
     @Transactional(propagation = Propagation.REQUIRED)
-    public void start(String id) throws PlatformException{
-        baseModuleMapper.start(id);
+    public void start(Map paramMap) throws PlatformException{
+        baseModuleMapper.start(paramMap);
     }
 
     @Transactional(propagation = Propagation.REQUIRED)
-    public void stop(String id) throws PlatformException{
-        baseModuleMapper.stop(id);
+    public void stop(Map paramMap) throws PlatformException{
+        baseModuleMapper.stop(paramMap);
     }
 
-    @Override
+    /*@Override
     @Transactional(readOnly = true)
     public List findProjectModuleList(Map paramMap) throws PlatformException{
         return baseModuleMapper.findList(paramMap);
-    }
+    }*/
 }

@@ -8,9 +8,9 @@ import java.util.Map;
 
 public interface BaseRoleService extends BaseService {
 
-    void start(String id) throws PlatformException;
+    void start(Map paramMap) throws PlatformException;
 
-    void stop(String id) throws PlatformException;
+    void stop(Map paramMap) throws PlatformException;
 
     List findList(Map paramMap) throws PlatformException;
 

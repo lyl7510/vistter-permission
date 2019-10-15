@@ -12,7 +12,7 @@ public interface BaseModuleMapper extends BaseMapper {
 
     List getProjectModuleList(Map paramMap) throws PlatformException;
 
-    void start(String id) throws PlatformException;
+    void start(Map paramMap) throws PlatformException;
 
-    void stop(String id) throws PlatformException;
+    void stop(Map paramMap) throws PlatformException;
 }

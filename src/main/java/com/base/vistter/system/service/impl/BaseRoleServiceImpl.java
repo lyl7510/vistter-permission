@@ -35,13 +35,13 @@ public class BaseRoleServiceImpl extends BaseServiceImpl implements BaseRoleServ
     }
 
     @Transactional(propagation = Propagation.REQUIRED)
-    public void start(String id) throws PlatformException {
-        baseRoleMapper.start(id);
+    public void start(Map paramMap) throws PlatformException {
+        baseRoleMapper.start(paramMap);
     }
 
     @Transactional(propagation = Propagation.REQUIRED)
-    public void stop(String id) throws PlatformException {
-        baseRoleMapper.stop(id);
+    public void stop(Map paramMap) throws PlatformException {
+        baseRoleMapper.stop(paramMap);
     }
 
     @Override

@@ -19,4 +19,6 @@ public interface BaseRoleModuleMapper extends BaseMapper {
     void deleteByProjectRoleId(Map paramMap) throws PlatformException;
 
     void save(Map paramMap) throws PlatformException;
+
+    List getListByRoleId(Map paramMap) throws PlatformException;
 }
