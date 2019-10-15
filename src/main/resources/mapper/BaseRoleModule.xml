@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="BaseRoleModule">
+
+    <delete id="deleteByModuleId" parameterType="string">
+        delete from base_role_module where BASE_MODULE_ID = #{_parameter}
+    </delete>
+
+    <delete id="deleteByModuleIds" parameterType="list">
+        delete from base_role_module where BASE_MODULE_ID in
+        <foreach collection="list" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
+
+    <delete id="deleteByRoleId" parameterType="string">
+        delete from base_role_module where BASE_ROLE_ID = #{_parameter}
+    </delete>
+
+    <delete id="deleteByRoleIds" parameterType="list">
+        delete from base_role_module where BASE_ROLE_ID in
+        <foreach collection="list" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
+
+    <delete id="deleteByProjectRoleId" parameterType="map">
+        delete from base_role_module
+        where base_role_module.BASE_ROLE_ID = #{BASE_ROLE_ID}
+          and base_module.MODULE_TYPE = #{MODULE_TYPE}
+    </delete>
+
+    <insert id="save" parameterType="map">
+        insert into base_role_module (ID ,BASE_ROLE_ID ,
+        BASE_MODULE_ID,PROJECT_CODE,CREATEOR,CREATE_DATE,MODIFIER,MODIFY_DATE)
+        values
+        <foreach collection="MODULE_IDS" item="item" index="index" separator=",">
+            (
+            uuid(),
+            #{BASE_ROLE_ID},
+            #{item},
+            #{PROJECT_CODE},
+            #{CREATEOR},
+            now(),
+            #{MODIFIER},
+            now()
+            )
+        </foreach>
+    </insert>
+
+</mapper>

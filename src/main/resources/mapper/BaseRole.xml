@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="BaseRole">
+
+    <select id="pager" parameterType="map" resultType="map">
+        select * from base_role where PROJECT_CODE = #{PROJECT_CODE}
+        <if test="NAME!= null and NAME != ''">
+            and NAME LIKE CONCAT('%',#{NAME},'%')
+        </if>
+        <if test="STATE!= null and STATE != ''">
+            and STATE = #{STATE}
+        </if>
+        order by CREATE_DATE desc  limit #{start} , #{limit}
+    </select>
+
+    <select id="pagerCount" parameterType="map" resultType="long">
+        select count(*) from base_role where PROJECT_CODE = #{PROJECT_CODE}
+        <if test="NAME!= null and NAME != ''">
+            and NAME LIKE CONCAT('%',#{NAME},'%')
+        </if>
+        <if test="STATE!= null and STATE != ''">
+            and STATE = #{STATE}
+        </if>
+    </select>
+
+    <select id="load" parameterType="string" resultType="string">
+        select * from base_role where ID = #{_parameter}
+    </select>
+
+    <select id="findList"  parameterType="map" resultType="map">
+        select * from base_role where PROJECT_CODE = #{PROJECT_CODE}
+    </select>
+
+    <insert id="save" parameterType="map">
+        INSERT INTO base_role (ID, PROJECT_CODE, NAME, STATE, CREATEOR, CREATE_DATE, MODIFIER, MODIFY_DATE)
+        values (uuid(), #{PROJECT_CODE}, #{NAME}, #{STATE}, #{CREATEOR}, NOW(), #{MODIFIER}, now())
+    </insert>
+
+    <update id="update" parameterType="map">
+        update base_role
+        set NAME        = #{NAME},
+            STATE       = #{STATE},
+            MODIFIER    = #{MODIFIER},
+            MODIFY_DATE = NOW()
+        where ID = #{ID}
+    </update>
+
+    <delete id="deleteById" parameterType="string">
+        DELETE
+        FROM base_role
+        WHERE ID = #{_parameter}
+    </delete>
+
+    <update id="delete" parameterType="list">
+        DELETE
+        FROM base_role
+        WHERE ID in
+        <foreach collection="list" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </update>
+
+    <update id="start" parameterType="string">
+        UPDATE base_role
+        SET STATE     = 0,
+            MODIFY_DATE=now()
+        WHERE ID = #{_parameter}
+    </update>
+
+    <update id="stop" parameterType="string">
+        UPDATE base_role
+        SET STATE     = 1,
+            MODIFY_DATE=now()
+        WHERE ID = #{_parameter}
+    </update>
+
+</mapper>

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="BaseModule">
+
+    <select id="pager" parameterType="map" resultType="map">
+        select * from base_module where PROJECT_CODE = #{PROJECT_CODE}
+        <if test="MODULE_TYPE!= null and MODULE_TYPE != ''">
+            and MODULE_TYPE  = #{MODULE_TYPE}
+        </if>
+        <if test="NAME!= null and NAME != ''">
+            and NAME LIKE CONCAT('%',#{NAME},'%')
+        </if>
+        <if test="STATE!= null and STATE != ''">
+            and STATE = #{STATE}
+        </if> order by MODIFY_DATE desc limit #{start} , #{limit}
+
+    </select>
+
+    <select id="pagerCount" parameterType="map" resultType="long">
+        select count(*) from base_module where PROJECT_CODE = #{PROJECT_CODE}
+        <if test="MODULE_TYPE!= null and MODULE_TYPE != ''">
+            and MODULE_TYPE  = #{MODULE_TYPE}
+        </if>
+        <if test="NAME!= null and NAME != ''">
+            and NAME LIKE CONCAT('%',#{NAME},'%')
+        </if>
+        <if test="STATE!= null and STATE != ''">
+            and STATE = #{STATE}
+        </if>
+    </select>
+
+    <select id="getModuleListByRoleId" parameterType="map" resultType="map">
+         SELECT
+            bm.*
+        FROM
+            base_module bm
+                LEFT JOIN base_role_module brm ON bm.ID = brm.BASE_ROLE_ID
+        WHERE
+            bm.PROJECT_CODE = #{PROJECT_CODE}
+          AND bm.MODULE_TYPE = #{MODULE_TYPE}
+          AND bm.STATE = 0
+          AND bm.ID IN (
+            SELECT
+                BASE_MODULE_ID
+            FROM
+                base_role_module
+            WHERE
+                base_role_module.PROJECT_CODE = #{PROJECT_CODE}
+              AND base_role_module.BASE_ROLE_ID = #{BASE_ROLE_ID}
+        )
+    </select>
+
+    <select id="load" parameterType="string" resultType="map">
+        select * from base_module where ID = #{_parameter}
+    </select>
+
+    <select id="getProjectModuleList" parameterType="map" resultType="map">
+        select * from base_module where PROJECT_CODE = #{PROJECT_CODE} and MODULE_TYPE = #{MODULE_TYPE}
+    </select>
+
+    <insert id="save" parameterType="map">
+        INSERT INTO base_module (ID, PROJECT_CODE, MODULE_TYPE, NAME, ICON, URL, PARENT_ID, STATE,ORDER_LIST, CREATEOR, CREATE_DATE, MODIFIER, MODIFY_DATE)
+        values (uuid(), #{PROJECT_CODE}, #{MODULE_TYPE}, #{NAME}, #{ICON}, #{URL}, #{PARENT_ID}, #{STATE},#{ORDER_LIST}, #{CREATEOR}, now(), #{MODIFIER}, NOW())
+    </insert>
+
+    <update id="update" parameterType="map">
+        UPDATE base_module
+        SET NAME=#{NAME},
+            ICON=#{ICON},
+            URL=#{URL},
+            PARENT_ID=#{PARENT_ID},
+            STATE       = #{STATE},
+            ORDER_LIST  = #{ORDER_LIST},
+            MODIFIER    = #{MODIFIER},
+            MODIFY_DATE=NOW()
+        WHERE ID = #{ID}
+    </update>
+
+    <update id="start" parameterType="string">
+        UPDATE base_module
+        SET STATE      = 0,
+            MODIFY_DATE=now()
+        WHERE ID = #{_parameter}
+    </update>
+
+    <update id="stop" parameterType="string">
+        UPDATE base_module
+        SET STATE      = 1,
+            MODIFY_DATE=now()
+        WHERE ID = #{_parameter}
+    </update>
+
+    <delete id="deleteById" parameterType="string">
+        DELETE
+        FROM base_module
+        WHERE ID = #{_parameter}
+    </delete>
+
+    <delete id="delete" parameterType="list">
+        DELETE
+        FROM base_module
+        WHERE ID in
+        <foreach collection="list" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
+
+    <select id="findList" parameterType="map" resultType="map">
+        select * from base_module where PROJECT_CODE = #{PROJECT_CODE} and MODULE_TYPE = #{MODULE_TYPE}
+    </select>
+</mapper>

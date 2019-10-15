@@ -8,4 +8,6 @@ import java.util.Map;
 public interface BaseUserService extends BaseService {
 
     Map findByUserName(Map paramMap) throws PlatformException;
+
+    void resetPwd(Map paramMap) throws PlatformException;
 }

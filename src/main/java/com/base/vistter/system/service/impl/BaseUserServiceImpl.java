@@ -6,6 +6,7 @@ import com.base.vistter.system.mapper.BaseUserMapper;
 import com.base.vistter.system.service.BaseUserService;
 import com.base.vistter.service.impl.BaseServiceImpl;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
@@ -22,8 +23,14 @@ public class BaseUserServiceImpl extends BaseServiceImpl implements BaseUserServ
         return baseUserMapper;
     }
 
+    @Transactional(readOnly = true)
     public Map findByUserName(Map paramMap) throws PlatformException {
         return baseUserMapper.findByUserName(paramMap);
+    }
+
+    @Transactional(propagation = Propagation.REQUIRED)
+    public void resetPwd(Map paramMap) throws PlatformException {
+        baseUserMapper.resetPwd(paramMap);
     }
 
 }
