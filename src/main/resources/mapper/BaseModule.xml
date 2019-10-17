@@ -109,4 +109,15 @@
         </foreach>
     </delete>
 
+    <delete id="deleteByProjectId" parameterType="string">
+        delete from base_module where PROJECT_CODE in (select PROJECT_CODE from base_project where id = #{_parameter})
+    </delete>
+
+    <delete id="deleteByProjectIds" parameterType="list">
+        delete from base_module where PROJECT_CODE in (select PROJECT_CODE from base_project where id in
+        <foreach collection="list" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>)
+    </delete>
+
 </mapper>

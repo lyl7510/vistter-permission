@@ -107,4 +107,26 @@ public class BaseUserController {
             return Result.generErrorJson(e.getCode());
         }
     }
+
+    @RequestMapping(value = "/start", method = RequestMethod.POST , produces = "application/json;charset=UTF-8")
+    public Result start(@RequestBody Map paramMap){
+        try {
+            baseUserService.start(paramMap);
+            return Result.generJson(null);
+        } catch (PlatformException e) {
+            logger.error(e.getMessage());
+            return Result.generErrorJson(e.getCode());
+        }
+    }
+
+    @RequestMapping(value = "/stop", method = RequestMethod.POST , produces = "application/json;charset=UTF-8")
+    public Result stop(@RequestBody Map paramMap){
+        try {
+            baseUserService.stop(paramMap);
+            return Result.generJson(null);
+        } catch (PlatformException e) {
+            logger.error(e.getMessage());
+            return Result.generErrorJson(e.getCode());
+        }
+    }
 }

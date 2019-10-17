@@ -50,4 +50,22 @@ public class BaseModuleMapperImpl extends BaseMapperImpl implements BaseModuleMa
             throw new PlatformException();
         }
     }
+
+    public void deleteByProjectId(String projectId) throws PlatformException{
+        try {
+            super.delete("deleteByProjectId" , projectId);
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            throw new PlatformException();
+        }
+    }
+
+    public void deleteByProjectIds(List projectIds) throws PlatformException{
+        try {
+            super.delete("deleteByProjectIds" , projectIds);
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            throw new PlatformException();
+        }
+    }
 }

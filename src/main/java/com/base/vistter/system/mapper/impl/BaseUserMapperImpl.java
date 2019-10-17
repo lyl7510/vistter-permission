@@ -52,6 +52,24 @@ public class BaseUserMapperImpl extends BaseMapperImpl implements BaseUserMapper
         }
     }
 
+    public long countByDepartId(String departId) throws PlatformException{
+        try {
+            return super.count("countByDepartId", departId);
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            throw new PlatformException();
+        }
+    }
+
+    public long countByDepartIds(List departIds) throws PlatformException{
+        try {
+            return super.count("countByDepartIds", departIds);
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            throw new PlatformException();
+        }
+    }
+
     public void start(Map paramMap) throws PlatformException{
         try {
             super.update("start", paramMap);
@@ -73,6 +91,24 @@ public class BaseUserMapperImpl extends BaseMapperImpl implements BaseUserMapper
     public long usernameIsExit(Map paramMap) throws PlatformException{
         try {
             return super.count("usernameIsExit", paramMap);
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            throw new PlatformException();
+        }
+    }
+
+    public void deleteByProjectId(String projectId) throws PlatformException{
+        try {
+            super.delete("deleteByProjectId" , projectId);
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            throw new PlatformException();
+        }
+    }
+
+    public void deleteByProjectIds(List projectIds) throws PlatformException{
+        try {
+            super.delete("deleteByProjectIds" , projectIds);
         } catch (Exception e) {
             logger.error(e.getMessage());
             throw new PlatformException();

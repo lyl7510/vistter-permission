@@ -65,10 +65,21 @@
         </foreach>
     </select>
 
+    <select id="countByDepartId" parameterType="string" resultType="long">
+        select count(*) from base_user where BASE_DEPART_ID = #{_parameter}
+    </select>
+
+    <select id="countByDepartIds" parameterType="list" resultType="long">
+        select count(*) from base_user where BASE_DEPART_ID IN
+        <foreach collection="list" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+
     <insert id="save" parameterType="map">
-        insert into base_user (ID, USERNAME, TELPHONE, PASSWORD, BASE_ROLE_ID, STATUS, PROJECT_CODE, CREATEOR,
+        insert into base_user (ID, USERNAME, TELPHONE, PASSWORD, BASE_ROLE_ID,BASE_DEPART_ID STATUS, PROJECT_CODE, CREATEOR,
                                 CREATE_DATE, MODIFIER, MODIFY_DATE)
-        values (uuid(), #{USERNAME}, #{TELPHONE}, #{PASSWORD}, #{BASE_ROLE_ID}, #{STATUS}, #{PROJECT_CODE}, #{CREATEOR},
+        values (uuid(), #{USERNAME}, #{TELPHONE}, #{PASSWORD}, #{BASE_ROLE_ID},#{BASE_DEPART_ID}, #{STATUS}, #{PROJECT_CODE}, #{CREATEOR},
                 now(), #{MODIFIER}, now())
     </insert>
 
@@ -79,6 +90,7 @@
             BASE_ROLE_ID = #{BASE_ROLE_ID},
             STATUS       = #{STATUS},
             MODIFIER     = #{MODIFIER},
+            BASE_DEPART_ID = #{BASE_DEPART_ID},
             MODIFY_DATE  = now()
         where ID = #{ID}
     </update>
@@ -93,7 +105,7 @@
         DELETE
         FROM base_user
         WHERE ID in
-        <foreach collection="IDS" item="item" open="(" separator="," close=")">
+        <foreach collection="list" item="item" open="(" separator="," close=")">
             #{item}
         </foreach>
     </delete>
@@ -113,6 +125,17 @@
     </update>
 
     <select id="usernameIsExit" parameterType="map" resultType="long">
-        select count(*) from base_users where PROJECT_CODE = #{PROJECT_CODE} and USERNAME = #{USERNAME}
+        select count(*) from base_user where PROJECT_CODE = #{PROJECT_CODE} and USERNAME = #{USERNAME}
     </select>
+
+    <delete id="deleteByProjectId" parameterType="string">
+        delete from base_user where PROJECT_CODE in (select PROJECT_CODE from base_project where id = #{_parameter})
+    </delete>
+
+    <delete id="deleteByProjectIds" parameterType="list">
+        delete from base_user where PROJECT_CODE in (select PROJECT_CODE from base_project where id in
+        <foreach collection="list" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>)
+    </delete>
 </mapper>

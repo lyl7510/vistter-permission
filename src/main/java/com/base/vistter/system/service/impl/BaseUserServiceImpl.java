@@ -6,6 +6,8 @@ import com.base.vistter.system.bean.ErrorCode;
 import com.base.vistter.system.mapper.BaseUserMapper;
 import com.base.vistter.system.service.BaseUserService;
 import com.base.vistter.service.impl.BaseServiceImpl;
+import com.base.vistter.utils.Base64Utils;
+import org.apache.commons.collections.MapUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,6 +21,7 @@ public class BaseUserServiceImpl extends BaseServiceImpl implements BaseUserServ
 
     @Resource(name = "baseUserMapperImpl")
     private BaseUserMapper baseUserMapper;
+
 
     protected BaseMapper getBaseMapper() {
         return baseUserMapper;
@@ -53,7 +56,15 @@ public class BaseUserServiceImpl extends BaseServiceImpl implements BaseUserServ
         if(count > 0){
             throw new PlatformException(ErrorCode.USERNAME_IS_EXIT);
         }
+        paramMap.put("PASSWORD" , Base64Utils.encode(MapUtils.getString(paramMap ,"PASSWORD")));
         super.save(paramMap);
+    }
+
+    @Override
+    @Transactional(propagation = Propagation.REQUIRED)
+    public void update(Map paramMap) throws PlatformException {
+        paramMap.put("PASSWORD" , Base64Utils.encode(MapUtils.getString(paramMap ,"PASSWORD")));
+        super.update(paramMap);
     }
 
 }

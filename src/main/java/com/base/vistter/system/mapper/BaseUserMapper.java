@@ -18,9 +18,19 @@ public interface BaseUserMapper extends BaseMapper {
 
     long countByRoleIds(List roleIds) throws PlatformException;
 
+    long countByDepartId(String departId) throws PlatformException;
+
+    long countByDepartIds(List departIds) throws PlatformException;
+
     void start(Map paramMap) throws PlatformException;
 
     void stop(Map paramMap) throws PlatformException;
 
     long usernameIsExit(Map paramMap) throws PlatformException;
+
+    void deleteByProjectId(String projectId) throws PlatformException;
+
+    void deleteByProjectIds(List projectIds) throws PlatformException;
+
+
 }

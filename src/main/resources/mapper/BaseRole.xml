@@ -29,7 +29,7 @@
         select * from base_role where ID = #{_parameter}
     </select>
 
-    <select id="findList"  parameterType="map" resultType="map">
+    <select id="list"  parameterType="map" resultType="map">
         select * from base_role where PROJECT_CODE = #{PROJECT_CODE}
     </select>
 
@@ -77,5 +77,16 @@
             MODIFY_DATE=now()
         WHERE ID = #{ID}
     </update>
+
+    <delete id="deleteByProjectId" parameterType="string">
+        delete from base_role where PROJECT_CODE in (select PROJECT_CODE from base_project where id = #{_parameter})
+    </delete>
+
+    <delete id="deleteByProjectIds" parameterType="list">
+        delete from base_role where PROJECT_CODE in (select PROJECT_CODE from base_project where id in
+        <foreach collection="list" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>)
+    </delete>
 
 </mapper>

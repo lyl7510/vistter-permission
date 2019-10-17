@@ -3,7 +3,8 @@ package com.base.vistter.system.service.impl;
 import com.base.vistter.exception.PlatformException;
 import com.base.vistter.mapper.BaseMapper;
 import com.base.vistter.system.bean.ErrorCode;
-import com.base.vistter.system.mapper.BaseProjectMapper;
+import com.base.vistter.system.mapper.*;
+import com.base.vistter.system.service.BaseDepartService;
 import com.base.vistter.system.service.BaseProjectService;
 import com.base.vistter.service.impl.BaseServiceImpl;
 import org.apache.commons.collections.MapUtils;
@@ -21,6 +22,24 @@ public class BaseProjectServiceImpl extends BaseServiceImpl implements BaseProje
 
     @Resource(name = "baseProjectMapperImpl")
     private BaseProjectMapper baseProjectMapper;
+
+    @Resource(name = "baseDepartMapperImpl")
+    private BaseDepartMapper baseDepartMapper;
+
+    @Resource(name = "baseDictMapperImpl")
+    private BaseDictMapper baseDictMapper;
+
+    @Resource(name = "baseUserMapperImpl")
+    private BaseUserMapper baseUserMapper;
+
+    @Resource(name = "baseRoleModuleMapperImpl")
+    private BaseRoleModuleMapper baseRoleModuleMapper;
+
+    @Resource(name = "baseRoleMapperImpl")
+    private BaseRoleMapper baseRoleMapper;
+
+    @Resource(name = "baseModuleMapperImpl")
+    private BaseModuleMapper baseModuleMapper;
 
     protected BaseMapper getBaseMapper() {
         return this.baseProjectMapper;
@@ -44,12 +63,24 @@ public class BaseProjectServiceImpl extends BaseServiceImpl implements BaseProje
     @Override
     @Transactional(propagation = Propagation.REQUIRED)
     public void deleteById(String id) throws PlatformException {
+        baseDictMapper.deleteByProjectId(id);
+        baseUserMapper.deleteByProjectId(id);
+        baseDepartMapper.deleteByProjectId(id);
+        baseRoleModuleMapper.deleteByRoleId(id);
+        baseRoleMapper.deleteByProjectId(id);
+        baseModuleMapper.deleteByProjectId(id);
         baseProjectMapper.deleteById(id);
     }
 
     @Override
     @Transactional(propagation = Propagation.REQUIRED)
     public void delete(List list) throws PlatformException {
+        baseDictMapper.deleteByProjectIds(list);
+        baseUserMapper.deleteByProjectIds(list);
+        baseDepartMapper.deleteByProjectIds(list);
+        baseRoleModuleMapper.deleteByProjectIds(list);
+        baseRoleMapper.deleteByProjectIds(list);
+        baseModuleMapper.deleteByProjectIds(list);
         baseProjectMapper.delete(list);
     }
 

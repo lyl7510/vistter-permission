@@ -27,4 +27,7 @@ public final class ErrorCode {
     public static final int USERNAME_IS_EXIT = 304;
 
     public static final int DICT_VALUE_ISEXIST = 305;
+
+    public static final int DEPART_HAS_USERNAME = 306;
+
 }

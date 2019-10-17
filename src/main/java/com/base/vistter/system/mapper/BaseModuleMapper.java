@@ -15,4 +15,8 @@ public interface BaseModuleMapper extends BaseMapper {
     void start(Map paramMap) throws PlatformException;
 
     void stop(Map paramMap) throws PlatformException;
+
+    void deleteByProjectId(String projectId) throws PlatformException;
+
+    void deleteByProjectIds(List projectIds) throws PlatformException;
 }
