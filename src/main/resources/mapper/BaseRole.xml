@@ -62,18 +62,20 @@
         </foreach>
     </update>
 
-    <update id="start" parameterType="string">
+    <update id="start" parameterType="map">
         UPDATE base_role
         SET STATE     = 0,
+            MODIFIER    = #{MODIFIER},
             MODIFY_DATE=now()
-        WHERE ID = #{_parameter}
+        WHERE ID = #{ID}
     </update>
 
-    <update id="stop" parameterType="string">
+    <update id="stop" parameterType="map">
         UPDATE base_role
         SET STATE     = 1,
+            MODIFIER    = #{MODIFIER},
             MODIFY_DATE=now()
-        WHERE ID = #{_parameter}
+        WHERE ID = #{ID}
     </update>
 
 </mapper>

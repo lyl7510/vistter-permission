@@ -78,18 +78,20 @@
         WHERE ID = #{ID}
     </update>
 
-    <update id="start" parameterType="string">
+    <update id="start" parameterType="map">
         UPDATE base_module
         SET STATE      = 0,
+            MODIFIER = #{MODIFIER},
             MODIFY_DATE=now()
-        WHERE ID = #{_parameter}
+        WHERE ID = #{ID}
     </update>
 
-    <update id="stop" parameterType="string">
+    <update id="stop" parameterType="map">
         UPDATE base_module
         SET STATE      = 1,
+            MODIFIER = #{MODIFIER},
             MODIFY_DATE=now()
-        WHERE ID = #{_parameter}
+        WHERE ID = #{ID}
     </update>
 
     <delete id="deleteById" parameterType="string">
@@ -107,7 +109,4 @@
         </foreach>
     </delete>
 
-    <select id="findList" parameterType="map" resultType="map">
-        select * from base_module where PROJECT_CODE = #{PROJECT_CODE} and MODULE_TYPE = #{MODULE_TYPE}
-    </select>
 </mapper>

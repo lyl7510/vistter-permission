@@ -59,17 +59,17 @@
         WHERE ID = #{ID}
     </update>
 
-    <delete id="deleteById" parameterType="map">
+    <delete id="deleteById" parameterType="string">
         DELETE
         FROM base_project
-        WHERE ID = #{ID}
+        WHERE ID = #{_parameter}
     </delete>
 
-    <delete id="delete" parameterType="map">
+    <delete id="delete" parameterType="list">
         DELETE
         FROM base_project
         WHERE ID in
-        <foreach collection="IDS" item="item" open="(" separator="," close=")">
+        <foreach collection="list" item="item" open="(" separator="," close=")">
             #{item}
         </foreach>
     </delete>

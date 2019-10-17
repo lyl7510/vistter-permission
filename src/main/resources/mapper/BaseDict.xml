@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="BaseDict">
+
+    <select id="pager" parameterType="map" resultType="map">
+        select * from base_dict where PROJECT_CODE = #{PROJECT_CODE}
+        <if test="CODE!= null and CODE != ''">
+            and NAME LIKE CONCAT('%',#{CODE},'%')
+        </if>
+        order by CODE asc , ORDER_LIST ASC  limit #{start} , #{limit}
+    </select>
+
+    <select id="pagerCount" parameterType="map" resultType="long">
+        select count(*) from base_dict where PROJECT_CODE = #{PROJECT_CODE}
+        <if test="CODE!= null and CODE != ''">
+            and NAME LIKE CONCAT('%',#{CODE},'%')
+        </if>
+    </select>
+
+    <select id="load" parameterType="string" resultType="map">
+        select * from base_dict where ID = #{_parameter}
+    </select>
+
+    <select id="list"  parameterType="map" resultType="map">
+        select * from base_dict where PROJECT_CODE = #{PROJECT_CODE} AND CODE = #{CODE} ORDER ORDER_LIST ASC
+    </select>
+
+    <select id="isExist" parameterType="map" resultType="long">
+        select count(*) from base_dict where PROJECT_CODE = #{PROJECT_CODE} and code = #{CODE} and VALUE = #{VALUE}
+    </select>
+
+    <insert id="save" parameterType="map">
+        INSERT INTO base_dict (ID, PROJECT_CODE, CODE, LABEL,VALUE,ORDER_LIST, CREATEOR, CREATE_DATE, MODIFIER, MODIFY_DATE)
+        values (uuid(), #{PROJECT_CODE}, #{CODE}, #{LABEL},#{VALUE},#{ORDER_LIST}, #{CREATEOR}, NOW(), #{MODIFIER}, now())
+    </insert>
+
+    <update id="update" parameterType="map">
+        update base_dict
+        set CODE        = #{CODE},
+            LABEL       = #{LABEL},
+            VALUE       = #{VALUE},
+            ORDER_LIST       = #{ORDER_LIST},
+            MODIFIER    = #{MODIFIER},
+            MODIFY_DATE = NOW()
+        where ID = #{ID}
+    </update>
+
+    <delete id="deleteById" parameterType="string">
+        DELETE
+        FROM base_dict
+        WHERE ID = #{_parameter}
+    </delete>
+
+    <update id="delete" parameterType="list">
+        DELETE
+        FROM base_dict
+        WHERE ID in
+        <foreach collection="list" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </update>
+
+</mapper>

@@ -4,6 +4,40 @@
 
 <mapper namespace="BaseUser">
 
+    <select id="pager" parameterType="map" resultType="map">
+        select bu.* , br.NAME AS ROLENAME from base_user bu
+        left join base_role br on bu.BASE_ROLE_ID = br.ID
+        where bu.PROJECT_CODE = #{PROJECT_CODE}
+        <if test="USERNAME!= null and USERNAME != ''">
+            and bu.USERNAME  = #{USERNAME}
+        </if>
+        <if test="TELPHONE!= null and TELPHONE != ''">
+            and bu.TELPHONE  = #{TELPHONE}
+        </if>
+        <if test="STATUS!= null and STATUS != ''">
+            and bu.STATUS  = #{STATUS}
+        </if>
+        order by bu.MODIFIER desc limit #{start} , #{limit}
+    </select>
+
+    <select id="pagerCount" parameterType="map" resultType="long">
+        select count(*) from base_user bu
+        where bu.PROJECT_CODE = #{PROJECT_CODE}
+        <if test="USERNAME!= null and USERNAME != ''">
+            and bu.USERNAME  = #{USERNAME}
+        </if>
+        <if test="TELPHONE!= null and TELPHONE != ''">
+            and bu.TELPHONE  = #{TELPHONE}
+        </if>
+        <if test="STATUS!= null and STATUS != ''">
+            and bu.STATUS  = #{STATUS}
+        </if>
+    </select>
+
+    <select id="load" parameterType="map" resultType="map">
+        select * from base_user where ID = #{ID}
+    </select>
+
     <select id="findByUserName" parameterType="map" resultType="map">
         select * from base_user where PROJECT_CODE = #{projectCode}
         <if test="TELPHONE_LOGIN == 1">
@@ -31,4 +65,54 @@
         </foreach>
     </select>
 
+    <insert id="save" parameterType="map">
+        insert into base_user (ID, USERNAME, TELPHONE, PASSWORD, BASE_ROLE_ID, STATUS, PROJECT_CODE, CREATEOR,
+                                CREATE_DATE, MODIFIER, MODIFY_DATE)
+        values (uuid(), #{USERNAME}, #{TELPHONE}, #{PASSWORD}, #{BASE_ROLE_ID}, #{STATUS}, #{PROJECT_CODE}, #{CREATEOR},
+                now(), #{MODIFIER}, now())
+    </insert>
+
+    <update id="update" parameterType="map">
+        update base_user
+        set TELPHONE     = #{TELPHONE},
+            PASSWORD     = #{PASSWORD},
+            BASE_ROLE_ID = #{BASE_ROLE_ID},
+            STATUS       = #{STATUS},
+            MODIFIER     = #{MODIFIER},
+            MODIFY_DATE  = now()
+        where ID = #{ID}
+    </update>
+
+    <delete id="deleteById" parameterType="map">
+        DELETE
+        FROM base_user
+        WHERE ID = #{ID}
+    </delete>
+
+    <delete id="delete" parameterType="map">
+        DELETE
+        FROM base_user
+        WHERE ID in
+        <foreach collection="IDS" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
+
+    <update id="start" parameterType="map">
+        UPDATE base_user
+        SET STATUS      = 0,
+            MODIFY_DATE=now()
+        WHERE ID = #{ID}
+    </update>
+
+    <update id="stop" parameterType="map">
+        UPDATE base_user
+        SET STATUS      = 1,
+            MODIFY_DATE=now()
+        WHERE ID = #{ID}
+    </update>
+
+    <select id="usernameIsExit" parameterType="map" resultType="long">
+        select count(*) from base_users where PROJECT_CODE = #{PROJECT_CODE} and USERNAME = #{USERNAME}
+    </select>
 </mapper>

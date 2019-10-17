@@ -55,4 +55,5 @@ public class BaseUserServiceImpl extends BaseServiceImpl implements BaseUserServ
         }
         super.save(paramMap);
     }
+
 }

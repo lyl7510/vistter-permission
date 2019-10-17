@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="BaseDepart">
+
+    <select id="pager" parameterType="map" resultType="map">
+        select * from base_depart where PROJECT_CODE = #{PROJECT_CODE}
+        <if test="NAME!= null and NAME != ''">
+            and NAME LIKE CONCAT('%',#{NAME},'%')
+        </if>
+        order by MODIFY_DATE desc  limit #{start} , #{limit}
+    </select>
+
+    <select id="pagerCount" parameterType="map" resultType="long">
+        select count(*) from base_depart where PROJECT_CODE = #{PROJECT_CODE}
+        <if test="NAME!= null and NAME != ''">
+            and NAME LIKE CONCAT('%',#{NAME},'%')
+        </if>
+    </select>
+
+    <select id="load" parameterType="string" resultType="map">
+        select * from base_depart where ID = #{_parameter}
+    </select>
+
+    <select id="list"  parameterType="map" resultType="map">
+        select * from base_depart where PROJECT_CODE = #{PROJECT_CODE}
+    </select>
+
+    <insert id="save" parameterType="map">
+        INSERT INTO base_depart (ID, PROJECT_CODE, NAME, DES,PARENT_ID,ORDER_LIST, CREATEOR, CREATE_DATE, MODIFIER, MODIFY_DATE)
+        values (uuid(), #{PROJECT_CODE}, #{NAME}, #{DES},#{PARENT_ID},#{ORDER_LIST}, #{CREATEOR}, NOW(), #{MODIFIER}, now())
+    </insert>
+
+    <update id="update" parameterType="map">
+        update base_depart
+        set NAME        = #{NAME},
+            DES       = #{DES},
+            PARENT_ID       = #{PARENT_ID},
+            ORDER_LIST       = #{ORDER_LIST},
+            MODIFIER    = #{MODIFIER},
+            MODIFY_DATE = NOW()
+        where ID = #{ID}
+    </update>
+
+    <delete id="deleteById" parameterType="string">
+        DELETE
+        FROM base_depart
+        WHERE ID = #{_parameter}
+    </delete>
+
+    <update id="delete" parameterType="list">
+        DELETE
+        FROM base_depart
+        WHERE ID in
+        <foreach collection="list" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </update>
+
+</mapper>

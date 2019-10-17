@@ -27,7 +27,9 @@
     </delete>
 
     <delete id="deleteByProjectRoleId" parameterType="map">
-        delete from base_role_module
+        delete
+            base_role_module from base_role_module
+         INNER JOIN base_module on base_role_module.BASE_MODULE_ID = base_module.ID
         where base_role_module.BASE_ROLE_ID = #{BASE_ROLE_ID}
           and base_module.MODULE_TYPE = #{MODULE_TYPE}
     </delete>
@@ -49,5 +51,13 @@
             )
         </foreach>
     </insert>
+
+    <select id="getListByRoleId" parameterType="map" resultType="map">
+         select * from base_role_module
+         INNER JOIN base_module on base_role_module.BASE_MODULE_ID = base_module.ID
+        where base_role_module.BASE_ROLE_ID = #{BASE_ROLE_ID}
+          and base_module.MODULE_TYPE = #{MODULE_TYPE}
+          and base_role_module.PROJECT_CODE = #{PROJECT_CODE}
+    </select>
 
 </mapper>
