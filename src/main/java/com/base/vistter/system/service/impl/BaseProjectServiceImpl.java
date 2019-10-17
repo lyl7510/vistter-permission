@@ -8,6 +8,7 @@ import com.base.vistter.system.service.BaseProjectService;
 import com.base.vistter.service.impl.BaseServiceImpl;
 import org.apache.commons.collections.MapUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
@@ -31,21 +32,36 @@ public class BaseProjectServiceImpl extends BaseServiceImpl implements BaseProje
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED)
     public void save(Map paramMap) throws PlatformException {
         long projectCount = baseProjectMapper.verifyProjectCode(MapUtils.getString(paramMap, "PROJECT_CODE"));
         if (projectCount > 0) {
             throw new PlatformException(ErrorCode.PROJECT_CODE_ISEXIT);
         }
-        super.save(paramMap);
+        baseProjectMapper.save(paramMap);
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED)
     public void deleteById(String id) throws PlatformException {
-        super.deleteById(id);
+        baseProjectMapper.deleteById(id);
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED)
     public void delete(List list) throws PlatformException {
-        super.delete(list);
+        baseProjectMapper.delete(list);
+    }
+
+    @Override
+    @Transactional(propagation = Propagation.REQUIRED)
+    public void start(Map paramMap) throws PlatformException{
+        baseProjectMapper.start(paramMap);
+    }
+
+    @Override
+    @Transactional(propagation = Propagation.REQUIRED)
+    public void stop(Map paramMap) throws PlatformException{
+        baseProjectMapper.stop(paramMap);
     }
 }

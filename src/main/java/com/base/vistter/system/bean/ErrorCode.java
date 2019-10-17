@@ -23,4 +23,8 @@ public final class ErrorCode {
     public static  final int PROJECT_CODE_ISEXIT = 302;
 
     public static final int ROLE_EXIST_USERS = 303;
+
+    public static final int USERNAME_IS_EXIT = 304;
+
+    public static final int DICT_VALUE_ISEXIST = 305;
 }

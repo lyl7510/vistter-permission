@@ -3,8 +3,7 @@ package com.base.vistter.system.controller;
 import com.base.vistter.bean.Pager;
 import com.base.vistter.bean.Result;
 import com.base.vistter.exception.PlatformException;
-import com.base.vistter.system.service.BaseUserService;
-import com.base.vistter.utils.Base64Utils;
+import com.base.vistter.system.service.BaseDepartService;
 import com.base.vistter.utils.SessionUtils;
 import org.apache.commons.collections.MapUtils;
 import org.apache.logging.log4j.LogManager;
@@ -16,23 +15,24 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/user")
-public class BaseUserController {
+@RequestMapping("/depart")
+public class BaseDepartController{
 
-    private static final Logger logger = LogManager.getLogger(BaseUserController.class);
+    @Resource(name = "baseDepartServiceImpl")
+    private BaseDepartService baseDepartService;
 
-    @Resource(name = "baseUserServiceImpl")
-    private BaseUserService baseUserService;
+    protected static final Logger logger = LogManager.getLogger(BaseDepartController.class);
 
     @RequestMapping(value = "/findPager", method = RequestMethod.POST , produces = "application/json;charset=UTF-8")
     public Result findPager(HttpServletRequest request, @RequestBody Map paramMap){
         try {
             paramMap.put("PROJECT_CODE", SessionUtils.getProjectCode(request));
-            Pager pager = baseUserService.findPager(paramMap);
+            Pager pager = baseDepartService.findPager(paramMap);
             return Result.generJson(pager);
         } catch (Exception e) {
             logger.error(e.getMessage());
@@ -40,23 +40,10 @@ public class BaseUserController {
         }
     }
 
-    @RequestMapping(value = "/resetPwd", method = RequestMethod.POST , produces = "application/json;charset=UTF-8")
-    public Result resetPwd(HttpServletRequest request, @RequestBody Map paramMap){
-        try {
-            paramMap.put("ID" , SessionUtils.getLoginUserId(request));
-            paramMap.put("PASSWORD", Base64Utils.encode(MapUtils.getString(paramMap , "PASSWORD")));
-            baseUserService.resetPwd(paramMap);
-            return Result.generJson(null);
-        } catch (PlatformException e) {
-            logger.error(e.getMessage());
-            return Result.generErrorJson(e.getCode());
-        }
-    }
-
     @RequestMapping(value = "/load", method = RequestMethod.POST , produces = "application/json;charset=UTF-8")
     public Result load(@RequestBody Map paramMap){
         try {
-            return Result.generJson(baseUserService.load(MapUtils.getString(paramMap , "ID")));
+            return Result.generJson(baseDepartService.load(MapUtils.getString(paramMap , "ID")));
         } catch (PlatformException e) {
             logger.error(e.getMessage());
             return Result.generErrorJson(e.getCode());
@@ -67,7 +54,7 @@ public class BaseUserController {
     public Result save(HttpServletRequest request,@RequestBody Map paramMap){
         try {
             paramMap.put("PROJECT_CODE", SessionUtils.getProjectCode(request));
-            baseUserService.save(paramMap);
+            baseDepartService.save(paramMap);
             return Result.generJson(null);
         } catch (PlatformException e) {
             logger.error(e.getMessage());
@@ -78,7 +65,7 @@ public class BaseUserController {
     @RequestMapping(value = "/update", method = RequestMethod.POST , produces = "application/json;charset=UTF-8")
     public Result update(@RequestBody Map paramMap){
         try {
-            baseUserService.update(paramMap);
+            baseDepartService.update(paramMap);
             return Result.generJson(null);
         } catch (PlatformException e) {
             logger.error(e.getMessage());
@@ -89,8 +76,21 @@ public class BaseUserController {
     @RequestMapping(value = "/deleteById", method = RequestMethod.POST ,produces = "application/json;charset=UTF-8")
     public Result deleteById(@RequestBody Map paramMap){
         try {
-            baseUserService.deleteById(MapUtils.getString(paramMap, "ID"));
+            baseDepartService.deleteById(MapUtils.getString(paramMap, "ID"));
             return Result.generJson(null);
+        } catch (PlatformException e) {
+            logger.error(e.getMessage());
+            return Result.generErrorJson(e.getCode());
+        }
+    }
+
+    @RequestMapping(value = "/findList", method = RequestMethod.POST ,produces = "application/json;charset=UTF-8")
+    public Result findList(HttpServletRequest request){
+        try {
+            Map paramMap = new HashMap();
+            paramMap.put("PROJECT_CODE", SessionUtils.getProjectCode(request));
+            List list =  baseDepartService.findList(paramMap);
+            return Result.generJson(list);
         } catch (PlatformException e) {
             logger.error(e.getMessage());
             return Result.generErrorJson(e.getCode());
@@ -100,11 +100,13 @@ public class BaseUserController {
     @RequestMapping(value = "/delete", method = RequestMethod.POST , produces = "application/json;charset=UTF-8")
     public Result delete(@RequestBody Map paramMap){
         try {
-            baseUserService.delete((List) paramMap.get("list"));
+            baseDepartService.delete((List) paramMap.get("list"));
             return Result.generJson(null);
         } catch (PlatformException e) {
             logger.error(e.getMessage());
             return Result.generErrorJson(e.getCode());
         }
     }
+
+
 }

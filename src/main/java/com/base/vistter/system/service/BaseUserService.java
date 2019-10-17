@@ -10,4 +10,8 @@ public interface BaseUserService extends BaseService {
     Map findByUserName(Map paramMap) throws PlatformException;
 
     void resetPwd(Map paramMap) throws PlatformException;
+
+    void start(Map paramMap) throws PlatformException;
+
+    void stop(Map paramMap) throws PlatformException;
 }

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 @Repository("baseDepartMapperImpl")
 public class BaseDepartMapperImpl extends BaseMapperImpl implements BaseDepartMapper {
 
-    protected String getNameSpace(){
+    protected String getNameSpace() {
         return "BaseDepart";
     }
 

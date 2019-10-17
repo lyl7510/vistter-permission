@@ -52,4 +52,30 @@ public class BaseUserMapperImpl extends BaseMapperImpl implements BaseUserMapper
         }
     }
 
+    public void start(Map paramMap) throws PlatformException{
+        try {
+            super.update("start", paramMap);
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            throw new PlatformException();
+        }
+    }
+
+    public void stop(Map paramMap) throws PlatformException{
+        try {
+            super.update("stop", paramMap);
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            throw new PlatformException();
+        }
+    }
+
+    public long usernameIsExit(Map paramMap) throws PlatformException{
+        try {
+            return super.count("usernameIsExit", paramMap);
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            throw new PlatformException();
+        }
+    }
 }

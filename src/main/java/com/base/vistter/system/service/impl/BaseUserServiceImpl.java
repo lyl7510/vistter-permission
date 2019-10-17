@@ -2,6 +2,7 @@ package com.base.vistter.system.service.impl;
 
 import com.base.vistter.exception.PlatformException;
 import com.base.vistter.mapper.BaseMapper;
+import com.base.vistter.system.bean.ErrorCode;
 import com.base.vistter.system.mapper.BaseUserMapper;
 import com.base.vistter.system.service.BaseUserService;
 import com.base.vistter.service.impl.BaseServiceImpl;
@@ -33,4 +34,25 @@ public class BaseUserServiceImpl extends BaseServiceImpl implements BaseUserServ
         baseUserMapper.resetPwd(paramMap);
     }
 
+    @Override
+    @Transactional(propagation = Propagation.REQUIRED)
+    public void start(Map paramMap) throws PlatformException{
+        baseUserMapper.start(paramMap);
+    }
+
+    @Override
+    @Transactional(propagation = Propagation.REQUIRED)
+    public void stop(Map paramMap) throws PlatformException{
+        baseUserMapper.stop(paramMap);
+    }
+
+    @Override
+    @Transactional(propagation = Propagation.REQUIRED)
+    public void save(Map paramMap) throws PlatformException {
+        long count = baseUserMapper.usernameIsExit(paramMap);
+        if(count > 0){
+            throw new PlatformException(ErrorCode.USERNAME_IS_EXIT);
+        }
+        super.save(paramMap);
+    }
 }

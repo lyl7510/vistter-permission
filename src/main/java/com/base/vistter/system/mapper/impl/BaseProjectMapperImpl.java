@@ -33,4 +33,22 @@ public class BaseProjectMapperImpl extends BaseMapperImpl implements BaseProject
             throw new PlatformException();
         }
     }
+
+    public void start(Map paramMap) throws PlatformException{
+        try {
+            super.update("start" ,paramMap);
+        } catch (PlatformException e) {
+            logger.error(e.getMessage());
+            throw new PlatformException();
+        }
+    }
+
+    public void stop(Map paramMap) throws PlatformException{
+        try {
+            super.update("stop" ,paramMap);
+        } catch (PlatformException e) {
+            logger.error(e.getMessage());
+            throw new PlatformException();
+        }
+    }
 }

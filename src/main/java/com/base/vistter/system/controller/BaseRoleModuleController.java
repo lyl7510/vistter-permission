@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -39,8 +40,8 @@ public class BaseRoleModuleController {
     public Result getListByRoleId(HttpServletRequest request, @RequestBody Map paramMap) {
         try {
             paramMap.put("PROJECT_CODE", SessionUtils.getProjectCode(request));
-            baseRoleModuleService.getListByRoleId(paramMap);
-            return Result.generJson(null);
+            List list = baseRoleModuleService.getListByRoleId(paramMap);
+            return Result.generJson(list);
         } catch (Exception e) {
             logger.error(e.getMessage());
             return null;
