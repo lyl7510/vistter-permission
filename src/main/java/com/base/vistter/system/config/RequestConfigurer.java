@@ -1,6 +1,6 @@
 package com.base.vistter.system.config;
 
-import com.base.vistter.component.RequestHandlerInterceptor;
+import com.base.vistter.common.component.RequestHandlerInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;

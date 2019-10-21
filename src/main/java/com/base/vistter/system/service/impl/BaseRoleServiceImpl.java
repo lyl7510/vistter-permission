@@ -1,13 +1,13 @@
 package com.base.vistter.system.service.impl;
 
-import com.base.vistter.exception.PlatformException;
-import com.base.vistter.mapper.BaseMapper;
+import com.base.vistter.common.exception.PlatformException;
+import com.base.vistter.common.mapper.BaseMapper;
+import com.base.vistter.common.service.impl.BaseServiceImpl;
 import com.base.vistter.system.bean.ErrorCode;
 import com.base.vistter.system.mapper.BaseRoleMapper;
 import com.base.vistter.system.mapper.BaseRoleModuleMapper;
 import com.base.vistter.system.mapper.BaseUserMapper;
 import com.base.vistter.system.service.BaseRoleService;
-import com.base.vistter.service.impl.BaseServiceImpl;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;

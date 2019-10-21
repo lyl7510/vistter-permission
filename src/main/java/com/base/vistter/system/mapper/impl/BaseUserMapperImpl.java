@@ -1,7 +1,7 @@
 package com.base.vistter.system.mapper.impl;
 
-import com.base.vistter.exception.PlatformException;
-import com.base.vistter.mapper.impl.BaseMapperImpl;
+import com.base.vistter.common.exception.PlatformException;
+import com.base.vistter.common.mapper.impl.BaseMapperImpl;
 import com.base.vistter.system.mapper.BaseUserMapper;
 import org.springframework.stereotype.Repository;
 

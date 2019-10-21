@@ -1,7 +1,8 @@
 package com.base.vistter.system.service;
 
-import com.base.vistter.exception.PlatformException;
-import com.base.vistter.service.BaseService;
+
+import com.base.vistter.common.exception.PlatformException;
+import com.base.vistter.common.service.BaseService;
 
 import java.util.Map;
 

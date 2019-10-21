@@ -1,11 +1,11 @@
 package com.base.vistter.system.service.impl;
 
-import com.base.vistter.exception.PlatformException;
-import com.base.vistter.mapper.BaseMapper;
+import com.base.vistter.common.exception.PlatformException;
+import com.base.vistter.common.mapper.BaseMapper;
+import com.base.vistter.common.service.impl.BaseServiceImpl;
 import com.base.vistter.system.bean.ErrorCode;
 import com.base.vistter.system.mapper.BaseDictMapper;
 import com.base.vistter.system.service.BaseDictService;
-import com.base.vistter.service.impl.BaseServiceImpl;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,7 +22,7 @@ public class BaseDictServiceImpl extends BaseServiceImpl implements BaseDictServ
     private BaseDictMapper baseDictMapper;
 
     @Transactional(readOnly = true)
-    public List findList(Map paramMap) throws PlatformException{
+    public List findList(Map paramMap) throws PlatformException {
         return baseDictMapper.findList(paramMap);
     }
 

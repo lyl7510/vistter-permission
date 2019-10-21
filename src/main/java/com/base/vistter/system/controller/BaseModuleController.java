@@ -1,14 +1,17 @@
 package com.base.vistter.system.controller;
 
-import com.base.vistter.bean.Pager;
-import com.base.vistter.bean.Result;
-import com.base.vistter.exception.PlatformException;
+import com.base.vistter.common.bean.Pager;
+import com.base.vistter.common.bean.Result;
+import com.base.vistter.common.exception.PlatformException;
+import com.base.vistter.common.utils.SessionUtils;
 import com.base.vistter.system.service.BaseModuleService;
-import com.base.vistter.utils.SessionUtils;
 import org.apache.commons.collections.MapUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;

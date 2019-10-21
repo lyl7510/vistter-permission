@@ -1,9 +1,8 @@
 package com.base.vistter.system.mapper;
 
-import com.base.vistter.exception.PlatformException;
-import com.base.vistter.mapper.BaseMapper;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
+
+import com.base.vistter.common.exception.PlatformException;
+import com.base.vistter.common.mapper.BaseMapper;
 
 import java.util.List;
 import java.util.Map;

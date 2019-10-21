@@ -2,7 +2,7 @@
 
 <!--日志级别从低到高分为TRACE < DEBUG < INFO < WARN < ERROR < FATAL-->
 <!--含义是每隔600秒重新读取配置文件,不重启应用的情况下修改配置-->
-<Configuration status="DEBUG" monitorInterval="600">
+<Configuration status="TRACE" monitorInterval="600">
 
     <!-- 全局参数 -->
     <Properties>
@@ -14,32 +14,41 @@
         <Property name="APP_LOG_ROOT">G:\\websites\\log</Property>
     </Properties>
 
-
-    <appenders>
-
+    <Appenders>
         <Console name="Console" target="SYSTEM_OUT" follow="true">
             <!-- 设置日志输出的格式 -->
             <PatternLayout pattern="${LOG_PATTERN}"/>
         </Console>
-
-        <RollingFile name="CommonLogFile" fileName="${APP_LOG_ROOT}/common.log" filePattern="${APP_LOG_ROOT}/common_%d{yyyy-MM-dd-HH}.log">
+        <RollingFile name="CommonLogFile" fileName="${APP_LOG_ROOT}/common.log"
+                     filePattern="${APP_LOG_ROOT}/common_%d{yyyy-MM-dd-HH}.log">
             <PatternLayout pattern="${LOG_PATTERN}"/>
-            <SizeBasedTriggeringPolicy size="100MB"/>
-    </RollingFile>
-
-    </appenders>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="100 MB"/>
+            </Policies>
+        </RollingFile>
+        <RollingFile name="WebsiteLogFile" fileName="${APP_LOG_ROOT}/website.log"
+                     filePattern="${APP_LOG_ROOT}/website_%d{yyyy-MM-dd-HH}.log">
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="100 MB"/>
+            </Policies>
+        </RollingFile>
+    </Appenders>
 
     <loggers>
-
         <root level="DEBUG">
             <appender-ref ref="Console"/>
         </root>
-
         <Logger name="com.base.vistter.common" level="DEBUG" additivity="false">
-            <AppenderRef ref="Console" />
-            <AppenderRef ref="CommonLogFile" />
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="CommonLogFile"/>
         </Logger>
-
+        <Logger name="com.base.vistter.website" level="DEBUG" additivity="false">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="WebsiteLogFile"/>
+        </Logger>
     </loggers>
 
 </Configuration>

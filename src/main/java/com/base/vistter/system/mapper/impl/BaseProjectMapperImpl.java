@@ -1,7 +1,7 @@
 package com.base.vistter.system.mapper.impl;
 
-import com.base.vistter.exception.PlatformException;
-import com.base.vistter.mapper.impl.BaseMapperImpl;
+import com.base.vistter.common.exception.PlatformException;
+import com.base.vistter.common.mapper.impl.BaseMapperImpl;
 import com.base.vistter.system.mapper.BaseProjectMapper;
 import org.springframework.stereotype.Repository;
 
@@ -15,7 +15,7 @@ public class BaseProjectMapperImpl extends BaseMapperImpl implements BaseProject
         return "BaseProject";
     }
 
-    public Map findProjectSettingByCode(String projectCode) throws PlatformException{
+    public Map findProjectSettingByCode(String projectCode) throws PlatformException {
         try {
             return super.load("findProjectSettingByCode" , projectCode);
         } catch (PlatformException e) {

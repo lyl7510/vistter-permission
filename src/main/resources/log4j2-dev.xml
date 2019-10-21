@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--日志级别从低到高分为TRACE < DEBUG < INFO < WARN < ERROR < FATAL-->
+<!--含义是每隔600秒重新读取配置文件,不重启应用的情况下修改配置-->
+<Configuration status="TRACE" monitorInterval="600">
+
+    <!-- 全局参数 -->
+    <Properties>
+        <!--%d输出日期{yyyy-MM-dd HH:mm:ss,SSS}日期格式-->
+        <!--%p 输出优先级 %-5p的意思是日志级别输出左对齐-->
+        <!--%c 输出所属的类目，通常就是所在类的全名 %L显示调用logger的代码行-->
+        <!--%m 输出代码中指定的消息 %n 输出一个回车换行符-->
+        <Property name="LOG_PATTERN">%d{yyyy-MM-dd HH:mm:ss,SSS} %-5p %c{1}:%L -%m%n</Property>
+        <Property name="APP_LOG_ROOT">G:\\websites\\log</Property>
+    </Properties>
+
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT" follow="true">
+            <!-- 设置日志输出的格式 -->
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+        </Console>
+        <RollingFile name="CommonLogFile" fileName="${APP_LOG_ROOT}/common.log"
+                     filePattern="${APP_LOG_ROOT}/common_%d{yyyy-MM-dd-HH}.log">
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="100 MB"/>
+            </Policies>
+        </RollingFile>
+        <RollingFile name="SystemLogFile" fileName="${APP_LOG_ROOT}/system.log"
+                     filePattern="${APP_LOG_ROOT}/system_%d{yyyy-MM-dd-HH}.log">
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="100 MB"/>
+            </Policies>
+        </RollingFile>
+    </Appenders>
+
+    <loggers>
+        <root level="DEBUG">
+            <appender-ref ref="Console"/>
+        </root>
+        <Logger name="com.base.vistter.common" level="DEBUG" additivity="false">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="CommonLogFile"/>
+        </Logger>
+        <Logger name="com.base.vistter.system" level="DEBUG" additivity="false">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="SystemLogFile"/>
+        </Logger>
+    </loggers>
+
+</Configuration>

@@ -1,11 +1,11 @@
 package com.base.vistter.system.service.impl;
 
-import com.base.vistter.exception.PlatformException;
-import com.base.vistter.mapper.BaseMapper;
+import com.base.vistter.common.exception.PlatformException;
+import com.base.vistter.common.mapper.BaseMapper;
+import com.base.vistter.common.service.impl.BaseServiceImpl;
 import com.base.vistter.system.mapper.BaseModuleMapper;
 import com.base.vistter.system.mapper.BaseRoleModuleMapper;
 import com.base.vistter.system.service.BaseModuleService;
-import com.base.vistter.service.impl.BaseServiceImpl;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,7 +30,7 @@ public class BaseModuleServiceImpl extends BaseServiceImpl implements BaseModule
     }
 
     @Transactional(propagation = Propagation.REQUIRED)
-    public List getModuleListByRoleId(Map paramMap) throws PlatformException{
+    public List getModuleListByRoleId(Map paramMap) throws PlatformException {
         return baseModuleMapper.getModuleListByRoleId(paramMap);
     }
 

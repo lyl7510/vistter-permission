@@ -1,13 +1,13 @@
 package com.base.vistter.system.controller;
 
 import com.alibaba.druid.util.StringUtils;
-import com.base.vistter.bean.Result;
-import com.base.vistter.exception.PlatformException;
+import com.base.vistter.common.bean.Result;
+import com.base.vistter.common.exception.PlatformException;
+import com.base.vistter.common.utils.Base64Utils;
+import com.base.vistter.common.utils.SessionUtils;
 import com.base.vistter.system.bean.ErrorCode;
 import com.base.vistter.system.service.BaseProjectService;
 import com.base.vistter.system.service.BaseUserService;
-import com.base.vistter.utils.Base64Utils;
-import com.base.vistter.utils.SessionUtils;
 import org.apache.commons.collections.MapUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

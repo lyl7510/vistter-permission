@@ -1,9 +1,9 @@
 package com.base.vistter.system.service.impl;
 
-import com.base.vistter.mapper.BaseMapper;
+import com.base.vistter.common.mapper.BaseMapper;
+import com.base.vistter.common.service.impl.BaseServiceImpl;
 import com.base.vistter.system.mapper.BaseAttachmentMapper;
 import com.base.vistter.system.service.BaseAttachmentService;
-import com.base.vistter.service.impl.BaseServiceImpl;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

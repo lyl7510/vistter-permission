@@ -1,6 +1,6 @@
 package com.base.vistter.system.controller;
 
-import com.base.vistter.exception.PlatformException;
+import com.base.vistter.common.exception.PlatformException;
 import com.base.vistter.system.service.BaseAttachmentService;
 import org.apache.commons.collections.MapUtils;
 import org.springframework.beans.factory.annotation.Value;

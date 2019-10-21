@@ -1,7 +1,7 @@
 package com.base.vistter.system.controller;
 
-import com.base.vistter.bean.Result;
-import com.base.vistter.exception.PlatformException;
+import com.base.vistter.common.bean.Result;
+import com.base.vistter.common.exception.PlatformException;
 import com.base.vistter.system.service.BaseAttachmentService;
 import org.apache.commons.collections.MapUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -24,7 +24,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 
 
 @RestController

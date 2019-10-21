@@ -1,12 +1,11 @@
 package com.base.vistter.system.service.impl;
 
-import com.base.vistter.exception.PlatformException;
-import com.base.vistter.mapper.BaseMapper;
+import com.base.vistter.common.exception.PlatformException;
+import com.base.vistter.common.mapper.BaseMapper;
+import com.base.vistter.common.service.impl.BaseServiceImpl;
 import com.base.vistter.system.bean.ErrorCode;
 import com.base.vistter.system.mapper.*;
-import com.base.vistter.system.service.BaseDepartService;
 import com.base.vistter.system.service.BaseProjectService;
-import com.base.vistter.service.impl.BaseServiceImpl;
 import org.apache.commons.collections.MapUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;

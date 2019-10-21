@@ -1,7 +1,7 @@
 package com.base.vistter.system.mapper.impl;
 
-import com.base.vistter.exception.PlatformException;
-import com.base.vistter.mapper.impl.BaseMapperImpl;
+import com.base.vistter.common.exception.PlatformException;
+import com.base.vistter.common.mapper.impl.BaseMapperImpl;
 import com.base.vistter.system.mapper.BaseDictMapper;
 import org.springframework.stereotype.Repository;
 
@@ -16,7 +16,7 @@ public class BaseDictMapperImpl extends BaseMapperImpl implements BaseDictMapper
         return "BaseDict";
     }
 
-    public long isExist(Map paramMap) throws PlatformException{
+    public long isExist(Map paramMap) throws PlatformException {
         try {
             return super.count("isExist" , paramMap);
         } catch (Exception e) {

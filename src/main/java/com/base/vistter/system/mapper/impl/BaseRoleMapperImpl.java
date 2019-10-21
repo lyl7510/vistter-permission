@@ -1,7 +1,7 @@
 package com.base.vistter.system.mapper.impl;
 
-import com.base.vistter.exception.PlatformException;
-import com.base.vistter.mapper.impl.BaseMapperImpl;
+import com.base.vistter.common.exception.PlatformException;
+import com.base.vistter.common.mapper.impl.BaseMapperImpl;
 import com.base.vistter.system.mapper.BaseRoleMapper;
 import org.springframework.stereotype.Repository;
 
@@ -16,7 +16,7 @@ public class BaseRoleMapperImpl extends BaseMapperImpl implements BaseRoleMapper
         return "BaseRole";
     }
 
-    public void start(Map paramMap) throws PlatformException{
+    public void start(Map paramMap) throws PlatformException {
         try {
             super.update("start" , paramMap);
         } catch (Exception e) {

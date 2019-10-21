@@ -1,7 +1,7 @@
 package com.base.vistter.system.mapper.impl;
 
-import com.base.vistter.exception.PlatformException;
-import com.base.vistter.mapper.impl.BaseMapperImpl;
+import com.base.vistter.common.exception.PlatformException;
+import com.base.vistter.common.mapper.impl.BaseMapperImpl;
 import com.base.vistter.system.mapper.BaseDepartMapper;
 import org.springframework.stereotype.Repository;
 
@@ -15,7 +15,7 @@ public class BaseDepartMapperImpl extends BaseMapperImpl implements BaseDepartMa
     }
 
 
-    public void deleteByProjectId(String projectId) throws PlatformException{
+    public void deleteByProjectId(String projectId) throws PlatformException {
         try {
             super.delete("deleteByProjectId" , projectId);
         } catch (Exception e) {
