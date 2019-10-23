@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="BaseDepart">
+<mapper namespace="BaseAttachment">
 
     <insert id="save" parameterType="map">
         INSERT INTO base_attachment (ID, CREATE_DATE, FILE_NAME, FILE_PATH,FILE_SIZE,FILE_TYPE)

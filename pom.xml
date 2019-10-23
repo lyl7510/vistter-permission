@@ -57,7 +57,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>com.base.vistter.system.VistterSystemApplication</mainClass>
+                    <mainClass>com.base.vistter.system.VistterTomcatSystemApplication</mainClass>
                 </configuration>
             </plugin>
         </plugins>
