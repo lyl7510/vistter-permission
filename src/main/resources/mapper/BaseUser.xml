@@ -77,8 +77,7 @@
     </select>
 
     <insert id="save" parameterType="map">
-        insert into base_user (ID, USERNAME, TELPHONE, PASSWORD, BASE_ROLE_ID,BASE_DEPART_ID STATUS, PROJECT_CODE, CREATEOR,
-                                CREATE_DATE, MODIFIER, MODIFY_DATE)
+        insert into base_user (ID, USERNAME, TELPHONE, PASSWORD, BASE_ROLE_ID,BASE_DEPART_ID ,STATUS, PROJECT_CODE, CREATEOR, CREATE_DATE, MODIFIER, MODIFY_DATE)
         values (uuid(), #{USERNAME}, #{TELPHONE}, #{PASSWORD}, #{BASE_ROLE_ID},#{BASE_DEPART_ID}, #{STATUS}, #{PROJECT_CODE}, #{CREATEOR},
                 now(), #{MODIFIER}, now())
     </insert>

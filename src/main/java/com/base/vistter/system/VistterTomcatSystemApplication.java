@@ -17,4 +17,5 @@ public class VistterTomcatSystemApplication  extends SpringBootServletInitialize
     protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
         return builder.sources(VistterTomcatSystemApplication.class);
     }
+
 }

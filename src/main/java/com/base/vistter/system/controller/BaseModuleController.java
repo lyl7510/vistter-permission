@@ -42,6 +42,7 @@ public class BaseModuleController {
     @RequestMapping(value = "/getUserList", method = RequestMethod.POST , produces = "application/json;charset=UTF-8")
     public Result getUserList(HttpServletRequest request, @RequestBody Map paramMap){
         try {
+            logger.info(request.getSession().getId());
             paramMap.put("BASE_ROLE_ID", SessionUtils.getRoleId(request));
             paramMap.put("PROJECT_CODE", SessionUtils.getProjectCode(request));
             List list = baseModuleService.getModuleListByRoleId(paramMap);

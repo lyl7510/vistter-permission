@@ -33,7 +33,7 @@ public class LoginController {
     public Result isRequireCode(@RequestBody Map paramMap) throws PlatformException {
         Map projectMap = baseProjectService.findProjectSettingByCode(MapUtils.getString(paramMap, "projectCode"));
         if (projectMap == null) {
-            return Result.generErrorJson(151);
+            return Result.generErrorJson(ErrorCode.PREOJECT_NOT_FOUND);
         } else {
             return Result.generJson(MapUtils.getIntValue(projectMap, "SECURITY_CODE"));
         }

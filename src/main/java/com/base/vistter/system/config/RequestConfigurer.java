@@ -11,7 +11,7 @@ public class RequestConfigurer implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(RequestHandlerInterceptor()).addPathPatterns("/**");
+        registry.addInterceptor(RequestHandlerInterceptor()).addPathPatterns("/**").excludePathPatterns("/login");
     }
 
     @Bean
