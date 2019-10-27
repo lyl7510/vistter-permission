@@ -52,7 +52,7 @@ public class FileUploadController {
             // log.info("上传文件路径:{}",newFilePath);
             paramMap.put("FILE_PATH", newFilePath);
             paramMap.put("FILE_SIZE", multipartFile.getSize());
-            paramMap.put("ID" , UuidUtil.getTimeBasedUuid());
+            paramMap.put("ID" , UuidUtil.getTimeBasedUuid().toString());
 
             // 文件在服务器上保存一份
             try {
@@ -74,9 +74,10 @@ public class FileUploadController {
         File newFile = new File(savePath + "/" + newFilePath);
         File parentFile = newFile.getParentFile();
 
-        if (parentFile != null) {
+        if (!parentFile.exists() &&!parentFile.isDirectory()) {
             parentFile.mkdirs();
         }
+
         if (!newFile.exists()) {
             newFile.createNewFile();
         }
@@ -105,5 +106,4 @@ public class FileUploadController {
         }
 
     }
-
 }

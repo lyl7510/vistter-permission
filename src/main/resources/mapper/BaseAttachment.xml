@@ -9,8 +9,8 @@
         values (#{ID}, NOW(), #{FILE_NAME}, #{FILE_PATH},#{FILE_SIZE},#{FILE_TYPE})
     </insert>
 
-    <delete id="load" parameterType="string">
+    <select id="load" parameterType="string" resultType="map">
         select * from base_attachment where ID = #{_parameter}
-    </delete>
+    </select>
 
 </mapper>
